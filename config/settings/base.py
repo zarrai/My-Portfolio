@@ -77,6 +77,7 @@ THIRD_PARTY_APPS = [
     "rest_framework.authtoken",
     "corsheaders",
     "drf_spectacular",
+    "drf_multiple_model",
 ]
 
 LOCAL_APPS = [
@@ -188,6 +189,10 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "my_portfolio.users.context_processors.allauth_settings",
             ],
+            'libraries':{
+                # make your file entry here.
+                'filter_tags': 'portfolio.templatetags.filter',
+            }
         },
     }
 ]
@@ -222,6 +227,12 @@ EMAIL_BACKEND = env(
     "DJANGO_EMAIL_BACKEND",
     default="django.core.mail.backends.smtp.EmailBackend",
 )
+#test mail settings
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-timeout
 EMAIL_TIMEOUT = 5
 
