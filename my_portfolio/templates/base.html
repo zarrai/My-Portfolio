@@ -9,101 +9,119 @@
     <meta name="description" content="MY PERSONAL PORTFOLIO">
     <meta name="author" content="ZARRAI SAIF EDINE">
 
-    <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}">
+    <link rel="icon" href="{% static 'images/favicons/favicon.svg' %}">
+        {% block css%}
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Sedgwick+Ave+Display:wght@400;500;600&display=swap" rel="stylesheet">
+        <!-- Icons -->
+        <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.6/css/line.css">
+        <!-- Argon CSS -->
+        <link href="{% static 'css/project.min.css' %}" rel="stylesheet">
+        {% endblock css %}
+        <!-- Le javascript
+        ================================================== -->
+        {# Placed at the top of the document so pages load faster with defer #}
+        {% block javascript %}
+        <!-- Core -->
+        <script defer src="{% static 'js/core/jquery.min.js' %}"></script>
+        <script defer src="{% static 'js/core/popper.min.js' %}"></script>
+        <script defer src="{% static 'js/core/bootstrap.min.js' %}"></script>
 
-    {% block css %}
-    <!-- Your stuff: Third-party CSS libraries go here -->
+        <!-- Optional plugins -->
 
-    <!-- This file stores project-specific CSS -->
-    <link href="{% static 'css/project.min.css' %}" rel="stylesheet">
-    {% endblock %}
-    <!-- Le javascript
-    ================================================== -->
-    {# Placed at the top of the document so pages load faster with defer #}
-    {% block javascript %}
-      <!-- Vendor dependencies bundled as one file-->
-      <script defer src="{% static 'js/vendors.min.js' %}"></script>
+        <!-- Argon JS -->
+        <script defer src="{% static 'js/argon-design-system.js' %}"></script>
 
-      <!-- place project specific Javascript in this file -->
-      <script defer src="{% static 'js/project.min.js' %}"></script>
+        {% comment %}
+        <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+        <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
 
-    {% endblock javascript %}
+        <script src='https://www.google.com/recaptcha/api.js'></script>
+        <!-- Costom JS-->
+        <script src='https://cdn.tiny.cloud/1/d50e95ysaxzxlmnygzozwpoz6icwcj5yb9bezny21nx6k8tv/tinymce/5/tinymce.min.js' referrerpolicy="origin">
+        </script>
+        <script>
+            tinymce.init({
+            selector: '#form-description',
+            setup: function (editor) {
+                editor.on('change', function () {
+                    editor.save();
+                });
+            }
+            });
+        </script>
+        {% endcomment %}
+        <!-- stats.js lib --> 
+        <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> 
+        <!-- place project specific Javascript in this file -->
+        <script defer src="{% static 'js/project.min.js' %}"></script>
+        {% endblock javascript %}
 
-  </head>
+  
 
-  <body>
 
-    <div class="mb-1">
-      <nav class="navbar navbar-expand-md navbar-light bg-light">
-        <div class="container-fluid">
-          <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <a class="navbar-brand" href="{% url 'home' %}">My Portfolio</a>
+    </head>
+    <body>
+        {% block body %}
+            <!-- particles.js container --> 
+            <div id="particles-js">
+                <canvas class="particles-js-canvas-el" width="1874" height="1998" style="width: 100%; height: 100%;"></canvas>
+            </div> 
+            {% comment %} {% include 'navbar.html' %} {% endcomment %}
+            <div class="container">
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+                    <span class="alert-inner--icon"><i class="ni ni-like-2"></i></span>
+                    <span class="alert-inner--text">{{ message }}</span>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+            {% block content %}
+            {% endblock content %}
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="{% url 'home' %}">Home <span class="visually-hidden">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'about' %}">About</a>
-              </li>
-              {% if request.user.is_authenticated %}
-                <li class="nav-item">
-                  {# URL provided by django-allauth/account/urls.py #}
-                  <a class="nav-link" href="{% url 'users:detail' request.user.username  %}">{% translate "My Profile" %}</a>
-                </li>
-                <li class="nav-item">
-                  {# URL provided by django-allauth/account/urls.py #}
-                  <a class="nav-link" href="{% url 'account_logout' %}">{% translate "Sign Out" %}</a>
-                </li>
-              {% else %}
-                {% if ACCOUNT_ALLOW_REGISTRATION %}
-              <li class="nav-item">
-                {# URL provided by django-allauth/account/urls.py #}
-                <a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% translate "Sign Up" %}</a>
-              </li>
-              {% endif %}
-                <li class="nav-item">
-                  {# URL provided by django-allauth/account/urls.py #}
-                  <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% translate "Sign In" %}</a>
-                </li>
-              {% endif %}
-            </ul>
-          </div>
-        </div>
-      </nav>
+            <!-- Back to top button -->
+            <a id="Back-to-top-button">
+                <img class="" src="{% static 'images/rocket.svg' %}" >
+            </a>
 
-    </div>
+            <div class="container">
+                <hr>
+                <div class="row pb-3 footer">
+                    <div class="col-12 text-center">
+                        <p>Copyright © {% now "Y" %} SAIF . All rights reserved</p>
+                        <p class="coder">Built with <i class="fa fa-heart text-danger"></i> in Django By <a href="https://github.com/zarrai">SAIF</a></p>
+                    </div>
+                </div>
+            </div>
+        {% endblock body %}
 
-    <div class="container">
+        {% block inline_javascript %}
+        <script>
+          window.addEventListener('DOMContentLoaded', () => { 
+            var btn = $('#Back-to-top-button');
 
-      {% if messages %}
-        {% for message in messages %}
-          <div class="alert alert-dismissible {% if message.tags %}alert-{{ message.tags }}{% endif %}">
-            {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-        {% endfor %}
-      {% endif %}
+            $(window).scroll(function() {
+            if ($(window).scrollTop() > 300) {
+                btn.addClass('show');
+            } else {
+                btn.removeClass('show');
+            }
+            });
 
-      {% block content %}
-        <p>Use this document as a way to quick start any new project.</p>
-      {% endblock content %}
+            btn.on('click', function(e) {
+            e.preventDefault();
+            $('html, body').animate({scrollTop:0}, '300');
+            });
 
-    </div> <!-- /container -->
-
-    {% block modal %}{% endblock modal %}
-
-    {% block inline_javascript %}
-    {% comment %}
-    Script tags with only code, no src (defer by default). To run
-    with a "defer" so that you run inline code:
-    <script>
-      window.addEventListener('DOMContentLoaded', () => {/* Run whatever you want */});
-    </script>
-    {% endcomment %}
-    {% endblock inline_javascript %}
-  </body>
+        });
+        </script>
+        {% endblock inline_javascript %}
+    </body>
 </html>

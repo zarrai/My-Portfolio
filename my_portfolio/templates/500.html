@@ -1,11 +1,17 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %}Server Error{% endblock %}
-
 {% block content %}
-<h1>Ooops!!! 500</h1>
-
-<h3>Looks like something went wrong!</h3>
-
-<p>We track these errors automatically, but if the problem persists feel free to contact us. In the meantime, try refreshing.</p>
+    <div class="container">
+        <div class="row m-0">
+            <div class="col-lg-6 text-center page-404">
+                <p class="code">500</p>
+                <p class="status">something went wrong!</p>
+                <p class="message">We track these errors automatically, but if the problem persists feel free to contact us. In the meantime, try refreshing.</p>
+            </div>
+            <div class="col-lg-6 text-center">
+                <img src="{% static 'images/page-not-found.png' %}" width=100%>
+            </div>
+        </div>
+    </div>
 {% endblock content %}
