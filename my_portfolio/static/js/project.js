@@ -55,7 +55,7 @@ if (formSubmitBtn && resendMessage) {
         e.preventDefault();
         resendMessage = false;
 
-        if (!rechaptcha) {
+        if (rechaptcha) {
             document.getElementById('recaptcha').style.display = 'block';
             document.getElementById('recaptcha-error').innerHTML = `<small class="error-text"><i class="fa fa-exclamation-triangle"></i> Oops, you have to check the recaptcha !</small>`;
             resendMessage = true;
@@ -157,79 +157,89 @@ function truncateString(str, num) {
     }
 }
 
-const searchBtn = document.querySelector('#search-btn');
 
-if (searchBtn) {
-    searchBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        // document.getElementById('search-form').submit();
-        searchText = document.getElementById('search-input');
-        if (searchText.value.length != 0) {
-            // Build formData object.
-            let formData = new FormData();
-            formData.append('searchText', searchText.value);
+function submit(){
+    searchText = document.getElementById('search-input');
+    if (searchText.value.length != 0) {
+        // Build formData object.
+        let formData = new FormData();
+        formData.append('searchText', searchText.value);
 
-            fetch("/search/", {
-                    body: formData,
-                    method: "post",
-                    credentials: 'same-origin',
-                    headers: {
-                        "X-CSRFToken": csrftoken
-                    }
-                }).then(response => response.json())
-                .then(data => {
-                    projectsContainer = document.getElementById('projectsContainer');
-                    if (data.success == true) {
+        fetch("/search/", {
+                body: formData,
+                method: "post",
+                credentials: 'same-origin',
+                headers: {
+                    "X-CSRFToken": csrftoken
+                }
+            }).then(response => response.json())
+            .then(data => {
+                projectsContainer = document.getElementById('projectsContainer');
+                if (data.success == true) {
+                    projectsContainer.innerHTML = '';
+                    data.projects.forEach(project => {
+                        projectsContainer.innerHTML += `
+                        <div class="col-lg-4 mb-4">
+                            <div class="card-loader card-loader--tabs"></div>
+                        </div>
+                        `;
+                    });
+
+                    setTimeout(() => {
                         projectsContainer.innerHTML = '';
                         data.projects.forEach(project => {
                             projectsContainer.innerHTML += `
-                            <div class="col-lg-4 mb-4">
-                                <div class="card-loader card-loader--tabs"></div>
+                            <div class="col-lg-4 mb-4 ">
+                                <a href="${project.url}">
+                                    <div class="card project-card mirror-face">
+                                        <div class="project-card-img">
+                                            <img src="${project.image_url}">
+                                        </div>
+                                        <div class="card-body pt-0">
+                                            <h1 class="project-card-title">${truncateString(project.title, 22)}</h1>
+                                            <p class="project-card-disc">${truncateString(project.description, 100)}</p>
+                                        </div>
+                                    </div>
+                                    </a>
                             </div>
                             `;
                         });
+                        projectsContainer.innerHTML += `
+                        <div class="col-12 my-4 text-center">
+                            <div class="back-to-projects">
+                                <a href="/projects">Back to Projects</a>
+                            </div>
+                        </div>
+                        `;
+                    }, 2000);
+                } else {
+                    projectsContainer.classList.add('justify-content-center')
+                    projectsContainer.innerHTML = `
+                        <div class="col-lg-4 text-center s-color">
+                            <p>There are no projects with the name '<strong class="color-primary">${data.searchText}</strong>'</p>
+                            <div class="back-to-projects">
+                                <a href="/projects">Back to Projects</a>
+                            </div>
+                        </div>
+                        `;
+                }
+            })
+    }
+}
+const searchBtn = document.querySelector('#search-btn');
+const searchInput = document.querySelector('#search-input');
 
-                        setTimeout(() => {
-                            projectsContainer.innerHTML = '';
-                            data.projects.forEach(project => {
-                                projectsContainer.innerHTML += `
-                                <div class="col-lg-4 mb-4 ">
-                                    <a href="${project.url}">
-                                        <div class="card project-card mirror-face">
-                                            <div class="project-card-img">
-                                                <img src="${project.image_url}">
-                                            </div>
-                                            <div class="card-body pt-0">
-                                                <h1 class="project-card-title">${truncateString(project.title, 22)}</h1>
-                                                <p class="project-card-disc">${truncateString(project.description, 100)}</p>
-                                            </div>
-                                        </div>
-                                        </a>
-                                </div>
-                                `;
-                            });
-                            projectsContainer.innerHTML += `
-                            <div class="col-12 my-4 text-center">
-                                <div class="back-to-projects">
-                                    <a href="/projects">Back to Projects</a>
-                                </div>
-                            </div>
-                            `;
-                        }, 2000);
-                    } else {
-                        projectsContainer.classList.add('justify-content-center')
-                        projectsContainer.innerHTML = `
-                            <div class="col-lg-4 text-center s-color">
-                                <p>There are no projects with the name '<strong class="color-primary">${data.searchText}</strong>'</p>
-                                <div class="back-to-projects">
-                                    <a href="/projects">Back to Projects</a>
-                                </div>
-                            </div>
-                            `;
-                    }
-                })
-        }
+if (searchBtn && searchInput) {
+    searchBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        submit();
     })
+    searchInput.addEventListener("keyup", function(e) {
+        e.preventDefault();
+        if(e.keyCode === 13) {
+            submit();
+        }
+    });
 }
 /* ---- particles.js config ---- */
 
