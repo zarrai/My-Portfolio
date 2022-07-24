@@ -16,6 +16,8 @@ urlpatterns = [
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
     path("", include("my_portfolio.portfolio.urls", namespace="index")),
+    path('summernote/', include('django_summernote.urls')), #summernote urls
+    path("blog/", include("my_portfolio.blog.urls", namespace="blog")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # API URLS

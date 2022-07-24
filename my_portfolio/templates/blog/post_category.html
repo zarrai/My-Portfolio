@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}{{ category }}{% endblock %} 
+{% block content %}
+<div class="line"></div>
+<div class="container">
+    <div class="row pt-lg-4">
+    <div class="col-lg-8">
+        <span class="h6 text-white font-weight-bold mb-4">All Categories:</span> 
+        {% for cat in category_count%}
+        <a href="{% url 'blog:post_category' cat.categories__title %}">
+        <button type="button" style="border-radius: 30px;" class="btn btn-outline-success btn-sm">{{cat.categories__title}}</button>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+<hr>
+
+    <div class="row" id="projectsContainer">
+        {% for post in posts %}
+            <div class="col-lg-4 mb-4 ">
+                <a href="{% url 'blog:post_detail' post.slug %}">
+                    <div class="project-card mirror-face">
+                            <div class="project-card-img">
+                                <img src="{{post.image.url}}">
+                            </div>
+                        <div class="card-body pt-0">
+                            <h1 class="project-card-title">{{post.title|truncatechars:22}}</h1>
+                            <p class="project-card-disc">{{post.overview|safe}}</p>
+                            <span class="h6 text-white font-weight-bold mb-4">Categories:</span> 
+                            {% for cat in post.categories.all %}
+                            <a class="badge badge-success" href="{% url 'blog:post_category' cat %}">{{ cat }}</a>
+                            {% endfor %}
+                            <p class="card-text text-sm font-weight-bold">{{post.timestamp| timesince}} ago</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

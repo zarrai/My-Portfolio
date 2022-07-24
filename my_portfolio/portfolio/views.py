@@ -14,6 +14,7 @@ from .models import (
     Information,
     Message,
 )
+from my_portfolio.blog.models import Post
 
 def email_send(data):
     # old_message = Message.objects.last()
@@ -55,6 +56,7 @@ def Home(request):
         experiences = Experience.objects.all().order_by('-id')
         projects = Project.objects.filter(show_in_slider=True).order_by('-id')
         info = Information.objects.first()
+        posts = Post.objects.filter(featured=True).order_by('-id')
         context = {
             'info': info,
             'competences': competences,
@@ -62,6 +64,7 @@ def Home(request):
             'experiences': experiences,
             'projects': projects,
             'form': form,
+            'posts':posts,
             'recaptcha_key': config("recaptcha_site_key", default="")
         }
     return render(request, template_name, context)

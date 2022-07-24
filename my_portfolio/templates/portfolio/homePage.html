@@ -15,7 +15,9 @@
                         <p class="s-color mt-5">{{info.mini_about}}</p>
                     </div>
                 </div>
-
+                <a href="{{ info.cv.url }}">
+                    <button type="button" class="btn btn-outline-success btn-round">Download Resume</button>
+                </a>
                 <div class="social-icons m-0 mt-3" style="justify-content: center;">
                     <a href="{{info.github}}" target="_blank">
                         <i class="fab fa-github"></i>
@@ -53,6 +55,9 @@
 
         <!-- Projects -->
         {% include 'portfolio/projects.html' %}
+
+        <!-- Blog -->
+        {% include "portfolio/postssection.html" %}
 
         <!-- About and Contact -->
         {% include 'portfolio/about_and_contact.html'%}

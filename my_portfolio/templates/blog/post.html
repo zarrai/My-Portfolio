@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}
+{{ post.title }}
+{% endblock %} 
+{% block content %}
+<div class="line"></div>
+<div class="container">
+    <div class="columns">
+        <div class="column col-9 col-sm-12">
+            <div class="post">
+
+                <h1>{{ post.title }}</h1>
+                <p>{{ post.overview|safe }}</p>
+                {{ post.content|safe }}
+            </div>
+            {% if 1 == 2 %}
+            <h2>Read also</h2>
+            <div class="columns">
+                {% for post in random_post %} {% if forloop.first or forloop.last%}
+                <div class="column col-4 col-xs-12">
+                    <a href="{% url 'blog:post_detail' post.slug  %}">
+                        <img src="{{ post.image.url }}">
+                    </a>
+                </div>
+                {% endif %}
+                <div class="column col-8 col-xs-12">
+                    <h2>{{ post.title }}</h2>
+                    <p>{{ post.overview|safe }}</p>
+                    <span>Categories:</span> {% for cat in post.categories.all %}
+                    <span class="chip"><a href="{% url 'blog:post_category' cat %}">{{ cat }}</a></span> {% endfor %}
+                    <div class="text-bold">{{post.timestamp| timesince}} ago</div>
+                </div>
+                {% if not forloop.first and not forloop.last%}
+                <div class="column col-4 col-xs-12">
+                    <a href="{% url 'blog:post_detail' post.slug  %}">
+                        <img src="{{ post.image.url }}">
+                    </a>
+                </div>
+                {% endif %} {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        {% comment %}
+        <div id="blog-sidebar" class="column col-3 col-sm-12">
+            <h4 class="text-underline">Featured Posts</h4>
+            {% if featured %} {% for post in featured %}
+            <div class="card">
+                <div class="card-image">
+                    <a href="{% url 'blog:post_detail' post.slug  %}"><img class="img-responsive" src="{{ post.image.url }}"></a>
+                </div>
+                <div class="card-header">
+                    <div class="card-title h5">{{ post.title }}</div>
+                    <div class="card-subtitle text-gray">{{post.timestamp| timesince}} ago</div>
+                </div>
+                <div class="card-body">{{ post.overview|safe }}</div>
+            </div>
+            {% endfor %} {% else %}
+            <p class="text-italic">Nothing to see here yet! Check back later!</p>
+            {% endif %}
+            <div class="line hide-sm"></div>
+            <h4 class="text-underline">Latest Posts</h4>
+            {% for post in latest %}
+            <div class="card">
+                <div class="card-image">
+                    <a href="{% url 'blog:post_detail' post.slug  %}"><img class="img-responsive" src="{{ post.image.url }}"></a>
+                </div>
+                <div class="card-header">
+                    <div class="card-title h5">{{ post.title }}</div>
+                    <div class="card-subtitle text-gray">{{post.timestamp| timesince}} ago</div>
+                </div>
+                <div class="card-body">{{ post.overview|safe }}</div>
+
+            </div>
+            {% endfor %}
+        </div>
+        {% endcomment %}
+    </div>
+</div>
+{% endblock %}

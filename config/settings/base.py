@@ -79,12 +79,13 @@ THIRD_PARTY_APPS = [
     "drf_spectacular",
     "drf_multiple_model",
     "ckeditor",
+    "django_summernote",
 ]
 
 LOCAL_APPS = [
     "my_portfolio.users",
     "my_portfolio.portfolio",
-    # Your stuff: custom apps go here
+    "blog",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -316,5 +317,3 @@ SPECTACULAR_SETTINGS = {
         {"url": "https://example.com", "description": "Production server"},
     ],
 }
-# Your stuff...
-# ------------------------------------------------------------------------------
