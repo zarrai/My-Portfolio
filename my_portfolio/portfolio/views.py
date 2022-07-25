@@ -52,8 +52,8 @@ def Home(request):
     if request.method == 'GET':
         form = MessageForm()
         competences = Competence.objects.all().order_by('id')
-        education = Education.objects.all().order_by('-id')
-        experiences = Experience.objects.all().order_by('-id')
+        education = Education.objects.all().order_by('-the_year')
+        experiences = Experience.objects.all().order_by('-the_year')
         projects = Project.objects.filter(show_in_slider=True).order_by('-id')
         info = Information.objects.first()
         posts = Post.objects.filter(featured=True).order_by('-id')
@@ -99,7 +99,7 @@ def search(request):
                 projects = list(projects)
                 for project, obj in zip(projects, objs):
                     project.update({
-                        'url': obj.get_project_absolute_url(),
+                        'url': obj.get_absolute_url(),
                         'image_url': obj.image.url
                     })
                 return JsonResponse({'success': True, 'projects': projects, 'searchText': search_text})

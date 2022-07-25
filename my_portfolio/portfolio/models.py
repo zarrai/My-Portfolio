@@ -1,6 +1,7 @@
 from django.db import models
 import re
 from ckeditor.fields import RichTextField
+from django.urls import reverse
 
 class Information(models.Model):
     name_complete = models.CharField(max_length=50, blank=True, null=True)
@@ -20,6 +21,7 @@ class Information(models.Model):
     facebook = models.URLField(blank=True, null=True)
     twitter = models.URLField(blank=True, null=True)
     instagram = models.URLField(blank=True, null=True)
+    upwork = models.URLField(blank=True, null=True)
 
     def __str__(self):
         return self.name_complete
@@ -37,19 +39,24 @@ class Competence(models.Model):
 class Education(models.Model):
     title = models.CharField(max_length=50, blank=False, null=False)
     description = models.TextField(blank=False, null=False)
-    the_year = models.CharField(max_length=50, blank=False, null=False)
+    the_year =  models.DateTimeField(auto_now= False, null=False)
 
     def __str__(self):
         return self.title
 
+    def year(self):
+        return self.the_year.strftime('%Y')
 
 class Experience(models.Model):
     title = models.CharField(max_length=50, blank=False, null=False)
     description = models.TextField(blank=False, null=False)
-    the_year = models.CharField(max_length=50, blank=False, null=False)
+    the_year =  models.DateTimeField(auto_now= False, null=False)
 
     def __str__(self):
         return self.title
+
+    def year(self):
+        return self.the_year.strftime('%Y')
 
 
 class Project(models.Model):
@@ -58,25 +65,16 @@ class Project(models.Model):
     description = RichTextField(blank=False, null=False)
     image = models.ImageField(upload_to="projects/", blank=False, null=False)
     tools = models.CharField(max_length=200, blank=False, null=False)
-    demo = models.URLField()
-    github = models.URLField()
+    demo = models.URLField(blank=True, null=True)
+    github = models.URLField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     show_in_slider = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
 
-    def get_project_absolute_url(self):
-        return "/projects/{}".format(self.slug)
-
-    def save(self, *args, **kwargs):
-        self.slug = self.slug_generate()
-        super(Project, self).save(*args, **kwargs)
-
-    def slug_generate(self):
-        slug = self.title.strip()
-        slug = re.sub(" ", "_", slug)
-        return slug.lower()
-
+    def get_absolute_url(self):
+        return reverse("index:projectDetail", kwargs={"slug": str(self.slug)})
 
 class Message(models.Model):
     name = models.CharField(max_length=100, null=False, blank=False)
