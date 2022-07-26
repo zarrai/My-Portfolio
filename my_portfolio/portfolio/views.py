@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from decouple import config
 from django.conf import settings
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404
@@ -65,7 +64,7 @@ def Home(request):
             'projects': projects,
             'form': form,
             'posts':posts,
-            'recaptcha_key': config("recaptcha_site_key", default="")
+            'recaptcha_key': "",
         }
     return render(request, template_name, context)
 

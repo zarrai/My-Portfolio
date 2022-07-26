@@ -1,6 +1,4 @@
 from django.db import models
-import re
-from ckeditor.fields import RichTextField
 from django.urls import reverse
 
 class Information(models.Model):
