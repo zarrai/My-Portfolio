@@ -62,7 +62,7 @@ class Experience(models.Model):
 class Project(models.Model):
     title = models.CharField(max_length=200, blank=False, null=False)
     slug = models.SlugField(max_length=200, blank=True, null=True)
-    description = RichTextField(blank=False, null=False)
+    description = models.TextField(blank=False, null=False)
     image = models.ImageField(upload_to="projects/", blank=False, null=False)
     tools = models.CharField(max_length=200, blank=False, null=False)
     demo = models.URLField(blank=True, null=True)

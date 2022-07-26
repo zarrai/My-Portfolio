@@ -78,7 +78,6 @@ THIRD_PARTY_APPS = [
     "corsheaders",
     "drf_spectacular",
     "drf_multiple_model",
-    "ckeditor",
     "django_summernote",
 ]
 
