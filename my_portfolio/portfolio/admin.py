@@ -10,10 +10,15 @@ class ProjectAdmin(SummernoteModelAdmin):
 
     summernote_fields = ('description',)
 
+class MessageAdmin(admin.ModelAdmin):
+    list_display = ('name', 'message','send_time')
+    list_filter = ("send_time",)
+    search_fields = ['message', 'name', 'email']
+    list_per_page = 10
 
 admin.site.register(Information)
 admin.site.register(Education)
 admin.site.register(Experience)
 admin.site.register(Competence)
 admin.site.register(Project, ProjectAdmin)
-admin.site.register(Message)
+admin.site.register(Message, MessageAdmin)
