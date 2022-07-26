@@ -13,7 +13,7 @@
             <div class="col-lg-3">
                 <div class="card card-blog card-background" data-animation="zooming">
                     <div class="full-background" style="background-image: url( {{ post.image.url }} )"></div>
-                    <a href="javascript:;">
+                    <a href="{% url 'blog:post_detail' post.slug %}">
                         <div class="card-body">
                             <div class="content-bottom">
                                 <h6 class="card-category text-white opacity-8">AI at the Edge</h6>

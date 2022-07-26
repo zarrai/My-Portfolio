@@ -1,9 +1,7 @@
-{% extends "base.html" %}
-{% block title %}
-{{ post.title }}
-{% endblock %} 
-{% block content %}
-<div class="line"></div>
+{% extends "base.html" %} 
+{% block title %} {{ post.title }} {% endblock %} 
+{% block content %} 
+{% comment %}
 <div class="container">
     <div class="columns">
         <div class="column col-9 col-sm-12">
@@ -73,7 +71,25 @@
             </div>
             {% endfor %}
         </div>
-        {% endcomment %}
+
     </div>
 </div>
+{% endcomment %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 ml-auto mr-auto">
+            <h6 class="category" style="color:var(--scolor);">{{post.timestamp| timesince}} ago</h6>
+            <h1 class="title">{{ post.title}}</h1>
+            <p>
+                {{ post.overview|safe }}
+            </p>
+            <img class="d-block w-100 project-image img-fluid" src="{{ post.image.url }}" alt="(img)">
+            <br> <br> {{ post.content|safe }}
+
+        </div>
+    </div>
+</div>
+
+
 {% endblock %}
