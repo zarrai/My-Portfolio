@@ -68,6 +68,8 @@ DJANGO_APPS = [
     "django.forms",
 ]
 THIRD_PARTY_APPS = [
+    "crispy_forms",
+    "crispy_bootstrap5",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
@@ -190,7 +192,7 @@ TEMPLATES = [
             ],
             'libraries':{
                 # make your file entry here.
-                'filter_tags': 'portfolio.templatetags.filter',
+                'filter_tags': 'my_portfolio.portfolio.templatetags.filter',
             }
         },
     }
