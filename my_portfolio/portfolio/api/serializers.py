@@ -1,12 +1,12 @@
 from rest_framework import serializers
+
 from my_portfolio.portfolio.models import (
     Competence,
     Education,
     Experience,
-    Project,
     Information,
+    Project,
 )
-
 
 # class UserSerializer(serializers.ModelSerializer):
 #     class Meta:
@@ -16,6 +16,7 @@ from my_portfolio.portfolio.models import (
 #         extra_kwargs = {
 #             "url": {"view_name": "api:user-detail", "lookup_field": "username"}
 #         }
+
 
 class EducationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -34,10 +35,14 @@ class CompetenceSerializer(serializers.ModelSerializer):
         model = Competence
         fields = "__all__"
 
+
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = "__all__"
+        lookup_field = "slug"
+        extra_kwargs = {"url": {"lookup_field": "slug"}}
+
 
 class InformationSerializer(serializers.ModelSerializer):
     class Meta:
