@@ -1,6 +1,5 @@
 from drf_multiple_model.viewsets import ObjectMultipleModelAPIViewSet
 from rest_framework import viewsets
-from rest_framework.permissions import IsAdminUser
 
 from my_portfolio.portfolio.models import (
     Competence,
@@ -10,6 +9,7 @@ from my_portfolio.portfolio.models import (
     Project,
 )
 
+from .permissions import IsAdminOrReadOnly
 from .serializers import (
     CompetenceSerializer,
     EducationSerializer,
@@ -44,28 +44,28 @@ class ProjectViewSet(viewsets.ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
     lookup_field = "slug"
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsAdminOrReadOnly]
 
 
 class CompetenceViewSet(viewsets.ModelViewSet):
     queryset = Competence.objects.all()
     serializer_class = CompetenceSerializer
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsAdminOrReadOnly]
 
 
 class EducationViewSet(viewsets.ModelViewSet):
     queryset = Education.objects.all()
     serializer_class = EducationSerializer
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsAdminOrReadOnly]
 
 
 class ExperienceViewSet(viewsets.ModelViewSet):
     queryset = Experience.objects.all()
     serializer_class = ExperienceSerializer
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsAdminOrReadOnly]
 
 
 class InformationViewSet(viewsets.ModelViewSet):
     queryset = Information.objects.all()
     serializer_class = InformationSerializer
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsAdminOrReadOnly]
