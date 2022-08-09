@@ -53,6 +53,7 @@ if (formName) {
 if (formSubmitBtn && resendMessage) {
     formSubmitBtn.addEventListener('click', (e) => {
         e.preventDefault();
+        formSubmitBtn.disabled = true
         resendMessage = false;
 
         if (rechaptcha) {
@@ -158,7 +159,7 @@ function truncateString(str, num) {
 }
 
 
-function submit(){
+function submit() {
     searchText = document.getElementById('search-input');
     if (searchText.value.length != 0) {
         // Build formData object.
@@ -236,7 +237,7 @@ if (searchBtn && searchInput) {
     })
     searchInput.addEventListener("keyup", function(e) {
         e.preventDefault();
-        if(e.keyCode === 13) {
+        if (e.keyCode === 13) {
             submit();
         }
     });
