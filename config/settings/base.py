@@ -318,7 +318,7 @@ SPECTACULAR_SETTINGS = {
         {"url": "https://example.com", "description": "Production server"},
     ],
 }
-META_SITE_PROTOCOL = env("META_SITE_PROTOCOL")
+META_SITE_PROTOCOL = env("META_SITE_PROTOCOL", default=["http"])
 META_USE_SITES = True
 META_USE_OG_PROPERTIES = True
 META_USE_TWITTER_PROPERTIES = True
