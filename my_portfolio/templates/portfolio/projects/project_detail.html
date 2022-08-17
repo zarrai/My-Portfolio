@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row p-lg-4 p-2 justify-content-center">
         <div class="col-12">
-            <p class="project-title mb-3">{{project.title}}</p> 
+            <p class="project-title mb-3">{{project.title}}</p>
             <hr class="mt-2">
         </div>
         <div class="col-lg-10 col-12">
@@ -13,15 +13,13 @@
         <div class="col-12 text-left mt-2">
             <p class="mini-title">Description:</p>
             <p class="project-disc">{{project.description|safe}}</p>
-            
+
             <div class="mt-4">
                 <p class="mini-title">Tools:</p>
                 <p class="mb-0">All the tools that I used in this project:</p>
-                {% with project.tools|split:"," as tools %}
-                    {% for tool in tools %}
+                    {% for tool in project.tags.all %}
                         <span class="tool">{{tool}}</span>
                     {% endfor %}
-                {% endwith %}
             </div>
 
             <div class="text-left pt-4">
@@ -34,7 +32,7 @@
                 {% endif %}
                 {% if project.demo %}
                 <a href="{{project.demo}}" class="preview-btn">
-                    <i class="fas fa-globe"></i> 
+                    <i class="fas fa-globe"></i>
                     Site Web On Live
                 </a>
                 {% endif %}

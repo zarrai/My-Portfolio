@@ -79,6 +79,8 @@ THIRD_PARTY_APPS = [
     "drf_spectacular",
     "drf_multiple_model",
     "django_summernote",
+    "meta",
+    "taggit",
 ]
 
 LOCAL_APPS = [
@@ -190,10 +192,10 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "my_portfolio.users.context_processors.allauth_settings",
             ],
-            'libraries':{
+            "libraries": {
                 # make your file entry here.
-                'filter_tags': 'my_portfolio.portfolio.templatetags.filter',
-            }
+                "filter_tags": "my_portfolio.portfolio.templatetags.filter",
+            },
         },
     }
 ]
@@ -228,12 +230,12 @@ EMAIL_BACKEND = env(
     "DJANGO_EMAIL_BACKEND",
     default="django.core.mail.backends.smtp.EmailBackend",
 )
-#test mail settings
+# test mail settings
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
+EMAIL_HOST_USER = env("EMAIL_HOST_USER", default="")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", default="")
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-timeout
 EMAIL_TIMEOUT = 5
 
@@ -316,3 +318,10 @@ SPECTACULAR_SETTINGS = {
         {"url": "https://example.com", "description": "Production server"},
     ],
 }
+META_SITE_PROTOCOL = env("META_SITE_PROTOCOL")
+META_USE_SITES = True
+META_USE_OG_PROPERTIES = True
+META_USE_TWITTER_PROPERTIES = True
+META_USE_SCHEMAORG_PROPERTIES = True
+META_DEFAULT_KEYWORDS = env.list("META_DEFAULT_KEYWORDS", default=[])
+META_INCLUDE_KEYWORDS = env.list("META_INCLUDE_KEYWORDS", default=[])
