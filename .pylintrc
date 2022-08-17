@@ -1,6 +1,7 @@
 [MASTER]
 load-plugins=pylint_django
 django-settings-module=config.settings.base
+ignore=static,templates
 [FORMAT]
 max-line-length=120
 

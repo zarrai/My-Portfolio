@@ -12,4 +12,3 @@ def test_project(project: Project):
         == f"/projects/{project.slug}/"
     )
     assert resolve(f"/projects/{project.slug}/").view_name == "index:projectDetail"
-

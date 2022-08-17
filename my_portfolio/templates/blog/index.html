@@ -8,7 +8,7 @@
             </div>
 
             <div class="col-lg-8">
-                <span class="h6 text-white font-weight-bold mb-4">Categories:</span> 
+                <span class="h6 text-white font-weight-bold mb-4">Categories:</span>
                 {% for cat in category_count%}
                 <a href="{% url 'blog:post_category' cat.categories__title %}">
                 <button type="button" style="border-radius: 30px;" class="btn btn-outline-success btn-sm">{{cat.categories__title}}</button>
@@ -29,7 +29,7 @@
                             <div class="card-body pt-0">
                                 <h1 class="project-card-title">{{post.title|truncatechars:22}}</h1>
                                 <p class="project-card-disc">{{post.overview|safe}}</p>
-                                <span class="h6 text-white font-weight-bold mb-4">Categories:</span> 
+                                <span class="h6 text-white font-weight-bold mb-4">Categories:</span>
                                 {% for cat in post.categories.all %}
                                 <a class="badge badge-success" href="{% url 'blog:post_category' cat %}">{{ cat }}</a>
                                 {% endfor %}
