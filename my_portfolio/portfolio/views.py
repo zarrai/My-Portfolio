@@ -3,6 +3,7 @@ from django.core.mail import send_mail
 from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
+from django.views.generic.base import TemplateView
 
 from my_portfolio.blog.models import Post
 
@@ -112,3 +113,7 @@ def search(request):
 
 def handler404(request, exception):
     return render(request, "404.html", status=404)
+
+
+class privacypolicy(TemplateView):
+    template_name = "privacypolicy.html"

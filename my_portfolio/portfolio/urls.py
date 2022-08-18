@@ -3,6 +3,7 @@ from django.urls import path
 from my_portfolio.portfolio.views import (
     Home,
     handler404,
+    privacypolicy,
     projectDetail,
     projectsPage,
     search,
@@ -17,4 +18,5 @@ urlpatterns = [
     path("projects/", projectsPage, name="projectsPage"),
     path("projects/<str:slug>/", projectDetail, name="projectDetail"),
     path("search/", search, name="search"),
+    path("privacypolicy/", privacypolicy.as_view(), name="privacypolicy"),
 ]

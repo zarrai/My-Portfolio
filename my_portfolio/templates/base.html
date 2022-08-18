@@ -71,7 +71,8 @@
         {% endblock javascript %}
 
 
-
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.css">
+        <script defer src="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.js"></script>
 
     </head>
     <body>
@@ -112,6 +113,15 @@
                     </div>
                 </div>
             </div>
+            <!-- START Bootstrap-Cookie-Alert -->
+            <div class="alert text-center cookiealert" role="alert">
+                <b>Do you like cookies?</b> &#x1F36A; I use cookies to ensure you get the best experience on my website. <a href="/privacypolicy/" target="_blank">Learn more</a>
+
+                <button type="button" class="btn btn-primary btn-sm acceptcookies">
+                    I agree
+                </button>
+            </div>
+            <!-- END Bootstrap-Cookie-Alert -->
         {% endblock body %}
 
         {% block inline_javascript %}
@@ -133,6 +143,15 @@
             });
 
         });
+        </script>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-5LHPJ8KWHV"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-5LHPJ8KWHV');
         </script>
         {% endblock inline_javascript %}
     </body>
