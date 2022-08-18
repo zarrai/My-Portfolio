@@ -8,7 +8,7 @@
         <span class="h6 text-white font-weight-bold mb-4">All Categories:</span>
         {% for cat in category_count%}
         <a href="{% url 'blog:post_category' cat.categories__title %}">
-        <button type="button" style="border-radius: 30px;" class="btn btn-outline-success btn-sm">{{cat.categories__title}}</button>
+        <button type="button" style="border-radius: 30px;" class="btn btn-outline-success btn-sm {% if cat.categories__title in request.path %} active {% endif %}">{{cat.categories__title}}</button>
         </a>
         {% endfor %}
     </div>

@@ -93,7 +93,7 @@ def search(request):
             lookups = (
                 Q(title__icontains=search_text)
                 | Q(description__icontains=search_text)
-                | Q(tools__icontains=search_text)
+                | Q(tags__name__icontains=search_text)
             )
 
             objs = Project.objects.filter(lookups)

@@ -86,7 +86,14 @@
             </p>
             <img class="d-block w-100 project-image img-fluid" src="{{ post.image.url }}" alt="(img)">
             <br> <br> {{ post.content|safe }}
-
+            <div class="col-lg-8 py-1">
+                <span class="h6 text-white font-weight-bold mb-4">Post Categories:</span>
+                {% for cat in post.categories.all%}
+                <a href="{% url 'blog:post_category' cat %}">
+                <button type="button" style="border-radius: 30px;" class="btn btn-outline-success btn-sm">{{cat}}</button>
+                </a>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>
