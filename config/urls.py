@@ -1,11 +1,21 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
 from django.urls import include, path
 from django.views import defaults as default_views
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework.authtoken.views import obtain_auth_token
 
+from my_portfolio.blog.sitemaps import CategorySitemap, PostSitemap
+from my_portfolio.portfolio.sitemaps import ProjectSitemap, StaticSitemap
+
+sitemaps = {
+    "posts": PostSitemap,
+    "categories": CategorySitemap,
+    "projects": ProjectSitemap,
+    "home": StaticSitemap,
+}
 urlpatterns = [
     # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
@@ -16,6 +26,12 @@ urlpatterns = [
     path("", include("my_portfolio.portfolio.urls", namespace="index")),
     path("summernote/", include("django_summernote.urls")),  # summernote urls
     path("blog/", include("my_portfolio.blog.urls", namespace="blog")),
+    path(
+        "sitemap.xml",
+        sitemap,
+        {"sitemaps": sitemaps},
+        name="django.contrib.sitemaps.views.sitemap",
+    ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # API URLS

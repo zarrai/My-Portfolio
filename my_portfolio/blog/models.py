@@ -13,7 +13,7 @@ class Category(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("post_category", kwargs={"title": str(self.title)})
+        return reverse("blog:post_category", kwargs={"title": str(self.title)})
 
     class Meta:
         db_table = "categories"
@@ -46,7 +46,7 @@ class Post(ModelMeta, models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("post_detail", kwargs={"slug": str(self.slug)})
+        return reverse("blog:post_detail", kwargs={"slug": str(self.slug)})
 
     def get_meta_image(self):
         return self.image.url
