@@ -326,3 +326,7 @@ META_USE_TWITTER_PROPERTIES = True
 META_USE_SCHEMAORG_PROPERTIES = True
 META_DEFAULT_KEYWORDS = env.list("META_DEFAULT_KEYWORDS", default=[])
 META_INCLUDE_KEYWORDS = env.list("META_INCLUDE_KEYWORDS", default=[])
+SUMMERNOTE_THEME = "bs4"
+SUMMERNOTE_CONFIG = {
+    "css": ("https://bootswatch.com/5/cyborg/bootstrap.css",),
+}
