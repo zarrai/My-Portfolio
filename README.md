@@ -1,27 +1,94 @@
 # My Portfolio
 
-MY PERSONAL PORTFOLIO
+This is my personal portfolio made with Django framework in the backend
+and frontend files are performed by gulp.
 
 [![Built with Cookiecutter Django](https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg?logo=cookiecutter)](https://github.com/cookiecutter/cookiecutter-django/)
 [![Black code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 
 License: MIT
 
-## Settings
+![Logo](https://saif.tn/media/saif.png)
 
-Moved to [settings](http://cookiecutter-django.readthedocs.io/en/latest/settings.html).
 
-## Basic Commands
+## Demo
 
-### Setting Up Your Users
+see the webisite in action https://saif.tn
 
--   To create a **normal user account**, just go to Sign Up and fill out the form. Once you submit it, you'll see a "Verify Your E-mail Address" page. Go to your console to see a simulated email verification message. Copy the link into your browser. Now the user's email should be verified and ready to go.
 
--   To create a **superuser account**, use this command:
+## Features
 
-        $ python manage.py createsuperuser
+- Light/dark mode toggle
+- For Django 3.2
+- Works with Python 3.9
+- Twitter Bootstrap
+- 12-Factor based settings via django-environ
+- Secure by default. We believe in SSL.
+- Optimized development and production settings
+- Registration via django-allauth
+- static build using Gulp and livereload
+- Run tests with unittest or pytest
+- Customizable PostgreSQL version
+- Default integration with pre-commit for identifying simple issues before submission to code review
+- Environment variables for configuration
 
-For convenience, you can keep your normal user logged in on Chrome and your superuser logged in on Firefox (or similar), so that you can see how the site behaves for both kinds of users.
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/zarrai/My-Portfolio.git
+```
+
+Go to the project directory
+
+```bash
+  cd my_portfolio
+```
+
+Install dependencies
+
+```bash
+  pip -r install requirements/local.txt
+```
+Environment variables configuration
+
+```
+DEBUG=True
+DJANGO_ALLOWED_HOSTS=
+DJANGO_SECRET_KEY=
+DATABASE_URL=
+REDIS_URL=
+DJANGO_ADMIN_URL=
+DJANGO_SECURE_SSL_REDIRECT=
+META_SITE_PROTOCOL=https
+META_DEFAULT_KEYWORDS=
+META_INCLUDE_KEYWORDS=
+```
+
+Start the server
+
+```bash
+  python manage.py migrate
+  python manage.py runserver
+```
+
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`DEBUG`
+`DJANGO_ALLOWED_HOSTS`
+`DJANGO_SECRET_KEY`
+`DATABASE_URL`
+`REDIS_URL`
+`DJANGO_ADMIN_URL`
+`DJANGO_SECURE_SSL_REDIRECT`
+`META_SITE_PROTOCOL`
+`META_DEFAULT_KEYWORDS`
+`META_INCLUDE_KEYWORDS`
 
 ### Type checks
 
