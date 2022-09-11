@@ -4,13 +4,30 @@
   <head {% meta_namespaces %}>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>{% block title %}My Portfolio{% endblock title %}</title>
+    <title>{% block title %}Portfolio {% endblock title %} | ZARRAI SAIF</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="ZARRAI SAIF EDINE">
     {% if meta %}
     {% include 'meta/meta.html' %}
     {% else %}
-    <meta name="description" content="ZARRAI SAIF PERSONAL PORTFOLIO">
+    <!-- Primary Meta Tags -->
+    <title>My Portfolio</title>
+    <meta name="title" content="My Portfolio">
+    <meta name="description" content="ZARRAI SAIF EDINE PERSONAL PORTFOLIO/BLOG. Phone:+21650031084. Mail:portfolio@saif.tn">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://saif.tn/">
+    <meta property="og:title" content="My Portfolio">
+    <meta property="og:description" content="ZARRAI SAIF EDINE PERSONAL PORTFOLIO/BLOG. Phone:+21650031084. Mail:portfolio@saif.tn">
+    <meta property="og:image" content="/media/screenshot.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://saif.tn/">
+    <meta property="twitter:title" content="My Portfolio">
+    <meta property="twitter:description" content="ZARRAI SAIF EDINE PERSONAL PORTFOLIO/BLOG. Phone:+21650031084. Mail:portfolio@saif.tn">
+    <meta property="twitter:image" content="/media/screenshot.png">
     {% spaceless %}
     {% autoescape off %}
     {% if keywords %}
@@ -45,24 +62,6 @@
         <!-- Argon JS -->
         <script defer src="{% static 'js/argon-design-system.js' %}"></script>
 
-        {% comment %}
-        <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
-        <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
-
-        <script src='https://www.google.com/recaptcha/api.js'></script>
-        <!-- Costom JS-->
-        <script src='https://cdn.tiny.cloud/1/d50e95ysaxzxlmnygzozwpoz6icwcj5yb9bezny21nx6k8tv/tinymce/5/tinymce.min.js' referrerpolicy="origin">
-        </script>
-        <script>
-            tinymce.init({
-            selector: '#form-description',
-            setup: function (editor) {
-                editor.on('change', function () {
-                    editor.save();
-                });
-            }
-            });
-        </script>
         {% endcomment %}
         <!-- stats.js lib -->
         <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
